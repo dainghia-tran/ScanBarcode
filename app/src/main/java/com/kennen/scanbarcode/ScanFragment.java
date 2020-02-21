@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import java.util.Locale;
 
 import static com.kennen.scanbarcode.MainActivity.intentIntegrator;
 import static com.kennen.scanbarcode.MainActivity.myDB;
+import static com.kennen.scanbarcode.MainActivity.viewPager;
 
 public class ScanFragment extends Fragment
 {
@@ -33,14 +35,10 @@ public class ScanFragment extends Fragment
         rootView = inflater.inflate(R.layout.scan_frag, container, false);
         scanButton = rootView.findViewById(R.id.btn_scan);
         intentIntegrator = IntentIntegrator.forSupportFragment(ScanFragment.this);
-        scanButton.setOnClickListener(new View.OnClickListener()
+        scanButton.setOnClickListener(v ->
         {
-            @Override
-            public void onClick(View v)
-            {
-                intentIntegrator.setPrompt("Đưa mã vào vạch đỏ");
-                intentIntegrator.initiateScan();
-            }
+            intentIntegrator.setPrompt("Đưa mã vào vạch đỏ");
+            intentIntegrator.initiateScan();
         });
         return rootView;
     }
@@ -58,7 +56,12 @@ public class ScanFragment extends Fragment
             {
                 Product product = myDB.getProduct(result.getContents());
                 if(product == null)
+                {
                     Toast.makeText(getContext(), "Chưa có trong cơ sở dữ liệu! Vui lòng cập nhật", Toast.LENGTH_LONG).show();
+                    viewPager.setCurrentItem(2, true);
+                    EditText temp = (EditText)viewPager.findViewById(R.id.et_code);
+                    temp.setText(result.getContents().toString());
+                }
                 else
                 {
                     String priceVNFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(Integer.valueOf(product.getPrice()));

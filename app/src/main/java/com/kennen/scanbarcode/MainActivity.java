@@ -17,7 +17,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity
 {
-    private ViewPager viewPager;
+    public static ViewPager viewPager;
     public static IntentIntegrator intentIntegrator;
     public static DatabaseHandler myDB;
 
