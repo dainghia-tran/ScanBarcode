@@ -17,7 +17,6 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.PrimitiveIterator;
 
 import static com.kennen.scanbarcode.MainActivity.intentIntegrator;
 import static com.kennen.scanbarcode.MainActivity.myDB;
@@ -32,14 +31,14 @@ public class ScanFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         rootView = inflater.inflate(R.layout.scan_frag, container, false);
-        scanButton = (Button) rootView.findViewById(R.id.btn_scan);
+        scanButton = rootView.findViewById(R.id.btn_scan);
         intentIntegrator = IntentIntegrator.forSupportFragment(ScanFragment.this);
         scanButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                intentIntegrator.setPrompt("Scan a barcode");
+                intentIntegrator.setPrompt("Đưa mã vào vạch đỏ");
                 intentIntegrator.initiateScan();
             }
         });
