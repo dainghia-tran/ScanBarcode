@@ -2,10 +2,10 @@
 Get the price of a product in a manually entered database
 
 Scan page
-![alt text](\screenshots\scan.png)
+![alt text](https://github.com/kennentran/ScanBarcode/blob/master/screenshots/scan.png)
 
 Update product information page
-![alt text](\screenshots\update.png)
+![alt text](https://github.com/kennentran/ScanBarcode/blob/master/screenshots/update.png)
 
 List product in database page
-![alt text](\screenshots\list.png)
+![alt text](https://github.com/kennentran/ScanBarcode/blob/master/screenshots/list.png)
