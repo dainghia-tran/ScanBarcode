@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHandler extends SQLiteOpenHelper
 {
     private static final String DB_NAME = "PRICE_MANAGER";
@@ -61,12 +64,12 @@ public class DatabaseHandler extends SQLiteOpenHelper
         return db.update(TABLE_NAME, values, selection, selectionArgs);
     }
 
-    public long Delete(Product product)
+    public long Delete(String barcode)
     {
         SQLiteDatabase db = getWritableDatabase();
 
         String selection = CODE + " = ?";
-        String[] selectionArgs = {product.getBarCode()};
+        String[] selectionArgs = {barcode};
 
         return db.delete(TABLE_NAME, selection, selectionArgs);
     }
@@ -83,5 +86,24 @@ public class DatabaseHandler extends SQLiteOpenHelper
         }
         cursor.close();
         return product;
+    }
+
+    public List<Product> getAllProduct()
+    {
+        List<Product> productList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select " + CODE + ", " + PRICE + " from " + TABLE_NAME, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast())
+        {
+            String code = cursor.getString(0);
+            String price = cursor.getString(1);
+            productList.add(new Product(code, price));
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return productList;
     }
 }

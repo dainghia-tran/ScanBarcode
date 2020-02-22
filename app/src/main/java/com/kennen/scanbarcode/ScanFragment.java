@@ -58,7 +58,7 @@ public class ScanFragment extends Fragment
                 if(product == null)
                 {
                     Toast.makeText(getContext(), "Chưa có trong cơ sở dữ liệu! Vui lòng cập nhật", Toast.LENGTH_LONG).show();
-                    viewPager.setCurrentItem(2, true);
+                    viewPager.setCurrentItem(1, true);
                     EditText temp = (EditText)viewPager.findViewById(R.id.et_code);
                     temp.setText(result.getContents().toString());
                 }

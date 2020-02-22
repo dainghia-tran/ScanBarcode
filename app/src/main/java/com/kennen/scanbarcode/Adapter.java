@@ -8,15 +8,17 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 public class Adapter extends FragmentStatePagerAdapter
 {
-    private String[] listTile = {"Quét mã", "Cập nhật CSDL"};
+    private String[] listTile = {"Quét mã", "Cập nhật sản phẩm", "Danh sách sản phẩm"};
     private ScanFragment scanFragment;
     private UpdateDBFragment updateDBFragment;
+    private ShowInformation showInformation;
 
     public Adapter(@NonNull FragmentManager fm)
     {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         scanFragment = new ScanFragment();
         updateDBFragment = new UpdateDBFragment();
+        showInformation = new ShowInformation();
     }
 
     @NonNull
@@ -25,8 +27,10 @@ public class Adapter extends FragmentStatePagerAdapter
     {
         if (position == 0)
             return scanFragment;
-        else
+        else if(position == 1)
             return updateDBFragment;
+        else
+            return showInformation;
     }
 
     @Override
